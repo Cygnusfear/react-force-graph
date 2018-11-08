@@ -29,6 +29,8 @@ const commonPropTypes = {
   linkDirectionalParticleSpeed: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.func]),
   linkDirectionalParticleWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.func]),
   linkDirectionalParticleColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  dagMode: PropTypes.oneOf(['td', 'bu', 'lr', 'rl', 'zin', 'zout', 'radialin', 'radialout']),
+  dagLevelDistance: PropTypes.number,
   d3AlphaDecay: PropTypes.number,
   d3VelocityDecay: PropTypes.number,
   warmupTicks: PropTypes.number,
@@ -79,7 +81,8 @@ export const ForceGraph3DPropTypes = Object.assign({},
   pointerBasedPropTypes,
   threeBasedPropTypes,
   {
-    enableNavigationControls: PropTypes.bool
+    enableNavigationControls: PropTypes.bool,
+    controlType: PropTypes.oneOf(['trackball', 'orbit', 'fly'])
   }
 );
 
@@ -88,6 +91,6 @@ export const ForceGraphVRPropTypes = Object.assign({},
   threeBasedPropTypes,
   {
     nodeDesc: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    linkDesc: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    linkDesc: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }
 );

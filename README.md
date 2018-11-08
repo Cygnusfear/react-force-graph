@@ -4,7 +4,13 @@ React bindings for the **force-graph** [suite](https://vasturiano.github.io/reac
 
 [![NPM](https://nodei.co/npm/react-force-graph.png?compact=true)](https://nodei.co/npm/react-force-graph/)
 
+<p align="center">
+  <a href="https://vasturiano.github.io/react-force-graph/example/large-graph/"><img width="80%" src="http://gist.github.com/vasturiano/02affe306ce445e423f992faeea13521/raw/preview.png"></a>
+</p>
+
 This module exports 3 React components with identical interfaces: `ForceGraph2D`, `ForceGraph3D` and `ForceGraphVR`. Each can be used to represent a graph data structure in a 2 or 3-dimensional space using a force-directed iterative layout.
+
+For dependency convenience, all of the components are also available as stand-alone packages: `react-force-graph-2d`, `react-force-graph-3d` and `react-force-graph-vr`.
 
 Uses canvas/WebGL for rendering and [d3-force-3d](https://github.com/vasturiano/d3-force-3d) for the underlying physics engine. 
 Supports zooming/panning, node dragging and node/link hover/click interactions.
@@ -33,11 +39,15 @@ import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 ```
 or
 ```
-var { ForceGraph2D, ForceGraph3D, ForceGraphVR } = require('react-force-graph');
+import ForceGraph2D from 'react-force-graph-2d';
+import ForceGraph3D from 'react-force-graph-3d';
+import ForceGraphVR from 'react-force-graph-vr';
 ```
-or even
+or using a script tag
 ```
-<script src="//unpkg.com/react-force-graph"></script>
+<script src="//unpkg.com/react-force-graph-2d"></script>
+<script src="//unpkg.com/react-force-graph-3d"></script>
+<script src="//unpkg.com/react-force-graph-vr"></script>
 ```
 then
 ```
@@ -117,12 +127,14 @@ Note that not all props listed below apply to all 3 components. The last 3 colum
 | <b>scene</b> | *-* | Access the internal ThreeJS [Scene](https://threejs.org/docs/#api/scenes/Scene). | | :heavy_check_mark: | |
 | <b>camera</b> | *-* | Access the internal ThreeJS [Camera](https://threejs.org/docs/#api/cameras/PerspectiveCamera). | | :heavy_check_mark: | |
 | <b>renderer</b> | *-* | Access the internal ThreeJS [WebGL renderer](https://threejs.org/docs/#api/renderers/WebGLRenderer). | | :heavy_check_mark: | |
-| <b>tbControls</b> | *-* | Access the internal ThreeJS [Trackball Controls](https://threejs.org/examples/misc_controls_trackball.html). | | :heavy_check_mark: | |
+| <b>controls</b> | *-* | Access the internal ThreeJS controls object. | | :heavy_check_mark: | |
 
 ### Force engine (d3-force) configuration 
 | Prop | Type | Default | Description | 2D | 3D | VR |
 | --- | :--: | :--: | --- | :--: | :--: | :--: |
 | <b>numDimensions</b> | <i>1</i>, <i>2</i> or <i>3</i> | 3 | Not applicable to 2D mode. Number of dimensions to run the force simulation on. | | :heavy_check_mark: | :heavy_check_mark: |
+| <b>dagMode</b> | <i>str</i> | *-* | Apply layout constraints based on the graph directionality. Only works for [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph) graph structures (without cycles). Choice between `td` (top-down), `bu` (bottom-up), `lr` (left-to-right), `rl` (right-to-left), `zout` (near-to-far), `zin` (far-to-near), `radialout` (outwards-radially) or `radialin` (inwards-radially). | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| <b>dagLevelDistance</b> | <i>num</i> | *auto-derived from the number of nodes* | If `dagMode` is engaged, this specifies the distance between the different graph depths. | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | <b>d3AlphaDecay</b> | <i>number</i> | 0.0228 | Sets the [simulation intensity decay](https://github.com/vasturiano/d3-force-3d#simulation_alphaDecay) parameter. | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | <b>d3VelocityDecay</b> | <i>number</i> | 0.4 | Nodes' [velocity decay](https://github.com/vasturiano/d3-force-3d#simulation_velocityDecay) that simulates the medium resistance. | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | <b>warmupTicks</b> | <i>number</i> | 0 | Number of layout engine cycles to dry-run at ignition before starting to render. | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
@@ -145,6 +157,7 @@ Note that not all props listed below apply to all 3 components. The last 3 colum
 | <b>onLinkClick</b> | <i>func</i> | *-* | Callback function for link clicks. The link object is included as single argument `onLinkClick(link)`. | :heavy_check_mark: | :heavy_check_mark: | |
 | <b>onLinkHover</b> | <i>func</i> | *-* | Callback function for link mouse over events. The link object (or `null` if there's no link under the mouse line of sight) is included as the first argument, and the previous link object (or null) as second argument: `onLinkHover(link, prevLink)`. | :heavy_check_mark: | :heavy_check_mark: | |
 | <b>linkHoverPrecision</b> | <i>number</i> | 4 | Whether to display the link label when gazing the link closely (low value) or from far away (high value). | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| <b>controlType</b> | <i>str</i> | `trackball` | Which type of control to use to control the camera on 3D mode. Choice between [trackball](https://threejs.org/examples/misc_controls_trackball.html), [orbit](https://threejs.org/examples/#misc_controls_orbit) or [fly](https://threejs.org/examples/misc_controls_fly.html). | | :heavy_check_mark: | |
 | <b>enableZoomPanInteraction</b> | <i>bool</i> | `true` | Whether to enable zooming and panning user interactions on a 2D canvas. | :heavy_check_mark: | | |
 | <b>enableNavigationControls</b> | <i>bool</i> | `true` | Whether to enable the trackball navigation controls used to move the camera using mouse interactions (rotate/zoom/pan). | | :heavy_check_mark: | |
 | <b>enablePointerInteraction</b> | <i>bool</i> | `true` | Whether to enable the mouse tracking events. This activates an internal tracker of the canvas mouse position and enables the functionality of object hover/click and tooltip labels, at the cost of performance. If you're looking for maximum gain in your graph performance it's recommended to switch off this property. | :heavy_check_mark: | :heavy_check_mark: | |

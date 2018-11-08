@@ -1,6 +1,6 @@
 import fromKapsule from 'react-kapsule';
 import ForceGraph3DKapsule from '3d-force-graph';
-import { ForceGraph3DPropTypes } from './forcegraph-proptypes';
+import { ForceGraph3DPropTypes } from '../../forcegraph-proptypes';
 
 const ForceGraph3D = fromKapsule(
   ForceGraph3DKapsule,
@@ -12,8 +12,9 @@ const ForceGraph3D = fromKapsule(
     'scene',
     'camera',
     'renderer',
-    'tbControls'
-  ]
+    'controls'
+  ],
+  ['controlType']
 );
 
 ForceGraph3D.displayName = 'ForceGraph3D';

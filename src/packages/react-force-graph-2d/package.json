@@ -1,10 +1,10 @@
 {
-  "name": "react-force-graph",
-  "version": "1.15.2",
-  "description": "React component for 2D, 3D and VR force directed graphs",
-  "unpkg": "dist/react-force-graph.min.js",
-  "main": "dist/react-force-graph.common.js",
-  "module": "dist/react-force-graph.module.js",
+  "name": "react-force-graph-2d",
+  "version": "1.1.0",
+  "description": "React component for 2D force directed graphs",
+  "unpkg": "dist/react-force-graph-2d.min.js",
+  "main": "dist/react-force-graph-2d.common.js",
+  "module": "dist/react-force-graph-2d.module.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vasturiano/react-force-graph.git"
@@ -14,11 +14,7 @@
     "react",
     "force",
     "graph",
-    "3d",
     "2d",
-    "vr",
-    "three",
-    "webgl",
     "canvas"
   ],
   "author": {
@@ -31,13 +27,11 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "watch": "rollup -c -w",
-    "minify": "uglifyjs dist/react-force-graph.js -o dist/react-force-graph.min.js -c -m --comments '/Version/'",
+    "minify": "uglifyjs dist/react-force-graph-2d.js -o dist/react-force-graph-2d.min.js -c -m --comments '/Version/'",
     "build-module": "rollup -c rollup.config.module.js",
     "prepublishOnly": "npm run build && npm run minify && npm run build-module"
   },
   "dependencies": {
-    "3d-force-graph": "^1.41.1",
-    "3d-force-graph-vr": "^1.21.0",
     "force-graph": "^1.10.0",
     "prop-types": "^15.6.2",
     "react-kapsule": "^1.4.1"
@@ -46,18 +40,8 @@
     "react": "*"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.66.6",
-    "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-replace": "^2.1.0",
-    "rollup-watch": "^4.3.1",
     "uglify-es": "^3.3.9"
   }
 }
